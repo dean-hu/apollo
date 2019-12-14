@@ -5,7 +5,6 @@ import com.ctrip.framework.apollo.core.dto.ApolloConfig;
 import com.ctrip.framework.apollo.core.dto.ApolloConfigNotification;
 import com.ctrip.framework.apollo.core.utils.ResourceUtils;
 import com.ctrip.framework.apollo.internals.ConfigServiceLocator;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
@@ -151,7 +150,9 @@ public class EmbeddedApollo extends ExternalResource {
     if (addedOrModifiedPropertiesOfNamespace.containsKey(namespace)) {
       addedOrModifiedPropertiesOfNamespace.get(namespace).put(someKey, someValue);
     } else {
-      addedOrModifiedPropertiesOfNamespace.put(namespace, ImmutableMap.of(someKey, someValue));
+      Map<String, String> m = new HashMap<>();
+      m.put(someKey, someValue);
+      addedOrModifiedPropertiesOfNamespace.put(namespace, m);
     }
   }
 
